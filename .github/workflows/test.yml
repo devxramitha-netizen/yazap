@@ -19,6 +19,12 @@ jobs:
         with:
           version: master
 
+      - name: Cache Zig dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/zig
+          key: ${{ runner.os }}-zig-${{ hashFiles('build.zig.zon', 'build.zig') }}
+
       - name: Run a build test
         run: zig build test
 
